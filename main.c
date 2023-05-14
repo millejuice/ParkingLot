@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "menu.h"
 
 typedef struct
 {
@@ -45,27 +46,6 @@ int main(){
 
         }
         return 0;
-}
-
-
-
-
-int printMenu(){
-int result;
-printf("--------------주차 관리 시스템----------------\n");
-printf("-                                           -\n");
-printf("--------------메뉴를 선택하세요--------------\n ");
-printf("1. 데이터 추가");
-printf("2. 데이터 변경");
-printf("3. 데이터 출력");//list형식
-printf("4. 데이터 삭제");
-printf("5. 요금 정산하기");
-printf("6. 남은 자리 확인하기");
-printf("7. 내 자동차 찾기");
-printf("0. 종료");
-scanf("%d",result);
-
-return result;
 }
 
 
