@@ -1,7 +1,7 @@
 # 2023OSSL
 2023-01 OSSL Team Project
 
-#*mini project 주제
+###*mini project 주제
 주차관리 시스템 
 
 -mini project에 대한 소개
