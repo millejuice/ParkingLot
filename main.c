@@ -12,16 +12,19 @@ typedef struct
     int row;          // 주차 되어있는 행
     int clomm;        // 주차 되어있는 열
     int pay;          // 할인받기 전 요금
-    //-------------------------------
-    // 아직 사용되지 않은 변수
     int exitTimeH; // 나가는 시간 요금 (평일,주말+공휴일)
     int exitTimeM; //
+    int total_pay; // 총 계산해야할 요금
+    //-------------------------------
+    // 아직 사용되지 않은 변수
+    
     int hollyday;  // 주말인지 아닌지 확인하는 방법
     int discount;  // 할인 요금
     int change;    // 거스름돈
-    int total_pay; // 총 계산해야할 요금
+    
 
 } parking;
+
 int printMenu();
 int addData(parking *s, parking *a, int count);
 int fixData(parking *s, parking *a, int count);
@@ -46,6 +49,29 @@ int main()
         if (menu == 3)
         {
                 }
+
+        if(menu == 5 )   //요금 정산하기
+        {
+                int hour=0;   //머무른 시간
+                int min=0;    //분
+                printf("시간당 2000원, 30분 단위로 1500원\n");
+                //1시간 23분 머물렀으면 3500원
+                printf("나가는 시간을 입력하세요: ");
+                scanf(" %d %d\n", &plist[index].exitTimeH, &plist[index].exitTimeM);
+
+                hour=plist[index].exitTimeH - plist[index].enterTimeH;
+                min=plist[index].exitTimeM - plist[index].enterTimeM;
+
+            if(min<=30)
+                min=1;
+            else if(min>30)
+                min=2;
+
+            plist[index].total_pay=hour*2000 + min*1500;
+            printf("지불해야 할 금액: %d\n",plist[index].total_pay);
+        }
+
+        count ++;
         if (menu == 0)
             break;
     }
@@ -138,4 +164,5 @@ int printCharge()
 
     return 0;
 }
+
 
