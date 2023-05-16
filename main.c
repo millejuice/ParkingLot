@@ -17,8 +17,8 @@ typedef struct
     int total_pay; // 총 계산해야할 요금
     //-------------------------------
     // 아직 사용되지 않은 변수
-    
-    int hollyday;  // 주말인지 아닌지 확인하는 방법
+
+    int hollyday;     //남은 자리 갯수    
     int discount;  // 할인 요금
     int change;    // 거스름돈
     
@@ -71,7 +71,18 @@ int main()
             printf("지불해야 할 금액: %d\n",plist[index].total_pay);
         }
 
-        count ++;
+        if(menu == 6)    //남은 자리 함수 구하기
+        {
+            int left=20-count;
+            printf("남은 자리 갯수: %d\n", count);
+            printf("사용할 수 없는 자리들:");
+            for(int i=0; i<count; i++)
+            {
+                        printf(" %d",plist[i].place);   
+            }
+            printf("\n");
+        }
+
         if (menu == 0)
             break;
     }
