@@ -27,9 +27,11 @@ typedef struct
 
 } parking;
 
-int printMenu();
-int addData(parking *s, parking *a, int count);
-int fixData(parking *s, parking *a, int count);
+int printMenu();// 메뉴 출력 함수
+int addData(parking *s, parking *a, int count);//데이터 추가함수
+int fixData(parking *s, parking *a, int count);//데이터 수정함수
+void listData(parking *a, int count);//데이터 리스트로 출력함수
+void readData(parking a);//데이터를 하나 읽는 함수 (수정X)
 void vacant(int count, parking *plist);
 void payment(parking *plist);
 void findMyCar(parking* p,int count);
@@ -54,6 +56,7 @@ int main()
         }
         if (menu == 3)
         {
+		listData(plist, count);
                 }
 
         if(menu == 5 )   //요금 정산하기
@@ -245,4 +248,22 @@ void payNchange(parking* p, int count)
         }
     }
 
+void listData(parking *a, int count)
+{
+    printf("등록되어 있는 데이터의 리스트\n\n");
+    printf("차량번호   주차한 시간  주차된 위치   \n");
+    printf("------------------------------------------------\n");
+    for (int i = 0; i < count; i++)
+    {
+        if (a[i].place == -1)
+            continue;
+        printf("%2d", i + 1);
+        readData(a[i]);
+    }
+}
+void readData(parking a)
+{
+    // 읽어오는 함수 구현해야한다
+    printf("%9s      %02d : %02d    %d\n", a.carName, a.enterTimeH, a.enterTimeM, a.place);
+}
 }
