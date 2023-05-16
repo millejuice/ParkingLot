@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct
 {
@@ -11,16 +12,17 @@ typedef struct
     int place;        // 주차되어있는 위치
     int row;          // 주차 되어있는 행
     int clomm;        // 주차 되어있는 열
-    int pay;          // 할인받기 전 요금
+    int pay;          // 지불할 금액
     int exitTimeH; // 나가는 시간 요금 (평일,주말+공휴일)
     int exitTimeM; //
     int total_pay; // 총 계산해야할 요금
+    int change;    // 거스름돈
     //-------------------------------
     // 아직 사용되지 않은 변수
 
-    int hollyday;     //남은 자리 갯수    
+    int weekend;     //남은 자리 갯수    
     int discount;  // 할인 요금
-    int change;    // 거스름돈
+    
     
 
 } parking;
@@ -30,6 +32,8 @@ int addData(parking *s, parking *a, int count);
 int fixData(parking *s, parking *a, int count);
 void vacant(int count, parking *plist);
 void payment(parking *plist);
+void findMyCar(parking* p,int count);
+void payNchange(parking* p,int count);
 
 int main()
 {
@@ -60,6 +64,16 @@ int main()
         if(menu == 6)    //남은 자리 함수 구하기
         {
             vacant(count, plist);
+        }
+
+        if(menu == 7)    //내 자동차 어딨는지 구하는 함수
+        {
+            findMyCar(plist,count);
+        }
+
+        if(menu == 8)    //지불 금액, 거스름돈 구하는 함수
+        {
+            payNchange(plist,count);
         }
 
         if (menu == 0)
@@ -141,6 +155,7 @@ int printMenu()
     printf("-5. 요금 정산하기                           -\n");
     printf("-6. 남은 자리 확인하기                      -\n");
     printf("-7. 내 자동차 찾기                          -\n");
+    printf("-8. 지불할 금액 & 거스름돈                     -\n");
     printf("-0. 종료                                    -\n");
     printf("---------------------------------------------\n");
 
@@ -149,9 +164,9 @@ int printMenu()
     return result;
 }
 
-int printCharge()
+int printCharge(parking* p)
 {
-
+    printf("지불해야 할 금액: %d\n", p->total_pay);
     return 0;
 }
 
@@ -186,6 +201,48 @@ void vacant(int count, parking *plist)
                         printf(" %d",plist[i].place);   
             }
             printf("\n");
-    
 }
 
+void findMyCar(parking* p, int count)
+{
+    char targetCar[20];
+
+    printf("차량번호를 입력하세요:\n");
+    scanf("%s", targetCar);
+
+    for(int i=0;i<count; i++)
+    {
+        if(strcmp(targetCar,p[i].carName)==0)   //입력한 차번호가 동일하면
+        {
+            printf("차가 %d에 주차되어 있습니다!\n",p[i].place);
+        }
+        else      //차번호가 동일하지 않으면
+        {
+            printf("등록된 차가 없습니다!!\n");
+        }
+    }
+}
+
+void payNchange(parking* p, int count)
+{
+    char targetCar[20];
+
+    printf("차량번호를 입력하세요:\n");
+    scanf("%s", targetCar);
+
+    for (int i = 0; i < count; i++) {
+        if (strcmp(targetCar, p[i].carName) == 0) {
+            printCharge(&p[i]);
+            // 거스름돈 계산 등의 추가 로직을 구현할 수 있습니다.
+
+            printf("얼마를 지불하겠습니까? \n");
+            scanf("%d", &p[i].pay);
+
+            p[i].change = p[i].pay - p[i].total_pay;
+
+            printf("거스름돈은 %d입니다.\n", p[i].change);
+            break;
+        }
+    }
+
+}
