@@ -10,7 +10,7 @@ C언어와 LINUX 프로그래밍을 사용하여 CRUD형식 으로 주차관리 
 또한 데이터를 파일로 저장과 불러올 수 있는 기능을 추가로 설정한다. 
 이 프로젝트의 핵심은 추가 함수로 유저가 자신의 차의 위치를 쉽게 파악 할 수 있으며 사용자가 보기 편한 인터페이스를 구축하여 작성하는것을 목표로 한다. 
 
-<img src= "https://cdn.pixabay.com/photo/2014/08/26/13/52/underground-parking-427958_1280.jpg">
+![public-parking-g4f20a2edd_1920](https://github.com/millejuice/ds/assets/109461985/33fe89b9-9550-4efe-94f0-40b2166d68c6)
 
 ### project에 포함시킬 기능 설명(향후 변경 가능함)
 
