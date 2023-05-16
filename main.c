@@ -28,6 +28,8 @@ typedef struct
 int printMenu();
 int addData(parking *s, parking *a, int count);
 int fixData(parking *s, parking *a, int count);
+void vacant(int count, parking *plist);
+void payment(parking *plist);
 
 int main()
 {
@@ -52,35 +54,12 @@ int main()
 
         if(menu == 5 )   //요금 정산하기
         {
-                int hour=0;   //머무른 시간
-                int min=0;    //분
-                printf("시간당 2000원, 30분 단위로 1500원\n");
-                //1시간 23분 머물렀으면 3500원
-                printf("나가는 시간을 입력하세요: ");
-                scanf(" %d %d\n", &plist[index].exitTimeH, &plist[index].exitTimeM);
-
-                hour=plist[index].exitTimeH - plist[index].enterTimeH;
-                min=plist[index].exitTimeM - plist[index].enterTimeM;
-
-            if(min<=30)
-                min=1;
-            else if(min>30)
-                min=2;
-
-            plist[index].total_pay=hour*2000 + min*1500;
-            printf("지불해야 할 금액: %d\n",plist[index].total_pay);
+                payment(&plist[index]);
         }
 
         if(menu == 6)    //남은 자리 함수 구하기
         {
-            int left=20-count;
-            printf("남은 자리 갯수: %d\n", count);
-            printf("사용할 수 없는 자리들:");
-            for(int i=0; i<count; i++)
-            {
-                        printf(" %d",plist[i].place);   
-            }
-            printf("\n");
+            vacant(count, plist);
         }
 
         if (menu == 0)
@@ -176,4 +155,37 @@ int printCharge()
     return 0;
 }
 
+void payment(parking* plist)
+{
+                int hour=0;   //머무른 시간
+                int min=0;    //분
+                printf("시간당 2000원, 30분 단위로 1500원\n");
+                //1시간 23분 머물렀으면 3500원
+                printf("나가는 시간을 입력하세요: ");
+                scanf(" %d %d\n", &(plist->exitTimeH), &(plist->exitTimeM));
+
+                hour=plist->exitTimeH - plist->enterTimeH;
+                min=plist->exitTimeM - plist->enterTimeM;
+
+            if(min<=30)
+                min=1;
+            else if(min>30)
+                min=2;
+
+            plist->total_pay=hour*2000 + min*1500;
+            printf("지불해야 할 금액: %d\n",plist->total_pay);
+}
+
+void vacant(int count, parking *plist)
+{
+    int left=20-count;
+            printf("남은 자리 갯수: %d\n", count);
+            printf("사용할 수 없는 자리들:");
+            for(int i=0; i<count; i++)
+            {
+                        printf(" %d",plist[i].place);   
+            }
+            printf("\n");
+    
+}
 
