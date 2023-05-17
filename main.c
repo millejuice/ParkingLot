@@ -28,7 +28,7 @@ typedef struct
 int printMenu();                                // 메뉴를 출력하는 함수
 int addData(parking *s, parking *a, int count); // 데이터를 출력하는 함수
 int fixData(parking *s, parking *a, int count); // 데이터를 수정하는 함수
-void delete(parking* p,int count);
+void deleteData(parking* p,int count);
 void vacant(int count, parking *plist);
 void payment(parking *plist);
 void findMyCar(parking *p, int count);
@@ -60,7 +60,7 @@ int main()
         }
         if (menu == 4)
         { // 데이터 삭제하기
-            delete(plist,count);
+            deleteData(plist,count);
         }
         if (menu == 5) // 요금 정산하기
         {
@@ -158,7 +158,7 @@ int fixData(parking *p, parking *a, int count)
     return 1;
 }
 
-void delete(parking* p, int count)
+void deleteData(parking* p, int count)
 {
     int d;
     printf("삭제할 자리 번호는? ");
