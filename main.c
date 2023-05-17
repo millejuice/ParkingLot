@@ -28,6 +28,7 @@ typedef struct
 int printMenu();                                // 메뉴를 출력하는 함수
 int addData(parking *s, parking *a, int count); // 데이터를 출력하는 함수
 int fixData(parking *s, parking *a, int count); // 데이터를 수정하는 함수
+void delete(parking* p,int count);
 void vacant(int count, parking *plist);
 void payment(parking *plist);
 void findMyCar(parking *p, int count);
@@ -59,6 +60,7 @@ int main()
         }
         if (menu == 4)
         { // 데이터 삭제하기
+            delete(plist,count);
         }
         if (menu == 5) // 요금 정산하기
         {
@@ -154,6 +156,27 @@ int fixData(parking *p, parking *a, int count)
     p->row = (p->place - 1) / 5;   // 행위치
 
     return 1;
+}
+
+void delete(parking* p, int count)
+{
+    int d;
+    printf("삭제할 자리 번호는? ");
+    scanf("%d", &d);                    //주차된 자리 번호 검색
+    for (int i = 0; i < count; i++)
+        {
+            if (p[i].place == d)        //입력한 자리와 주차 자리가 일치하다면
+            {
+                printf("차량 발견 했습니다!\n");
+                p[i].place = -1;     //자리 번호를 -1로 변화
+                break;
+            }
+
+            else{
+                printf("차랑 발견하지 못했습니다\n");      //없으면 프린트
+                break;
+            }
+        }
 }
 
 int printMenu()
