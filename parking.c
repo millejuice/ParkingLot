@@ -18,17 +18,21 @@ void printParkinglot()
     printf("|                                                                                         <--      입\n");
     printf("|                                                                                         <--      구\n");
     // 중간 테두리
-    for (int i = 1; i <= 2; i++)
+    int i = 0;
+    int j = 0;
+    int number = 1;
+    for (i = 0; i < 2; i++)
     {
         printEmpty();
-        for (int j = 1; j <= 2; j++)
+        for (j = 0; j < 2; j++)
         {
-
             printMiddleDot();
-            printMiddle(i, j);
+            printMiddle(number, number + 4);
+            number += 5;
         }
         printMiddleDot();
     }
+
     // 아래 출구
     printf("|                                                                                         -->      출\n");
     printf("|                                                                                         -->      구\n");
@@ -80,9 +84,9 @@ void printMiddle(int a, int b)
             printf(" ");
         }
 
-        for (int j = 0; j < 5; j++)
+        for (int j = a; j <= b; j++)
         {
-            printf("|%13d번", 100); // 숫자와 내용 출력하는 부분 중요 !!
+            printf("|%13d번", j); // 숫자와 내용 출력하는 부분 중요 !!
         }
         printf("|");
         for (int j = 0; j < 7; j++)
