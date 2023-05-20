@@ -95,7 +95,26 @@ void payment(parking *plist)
     plist->total_pay = hour * 2000 + min * 1500;
     printf("지불해야 할 금액: %d\n", plist->total_pay);
 }
+void deleteData(parking* p, int count)
+{
+    int d;
+    printf("삭제할 자리 번호는? ");
+    scanf("%d", &d);                    //주차된 자리 번호 검색
+    for (int i = 0; i < count; i++)
+        {
+            if (p[i].place == d)        //입력한 자리와 주차 자리가 일치하다면
+            {
+                printf("차량 발견 했습니다!\n");
+                p[i].place = -1;     //자리 번호를 -1로 변화
+                break;
+            }
 
+            else{
+                printf("차랑 발견하지 못했습니다\n");      //없으면 프린트
+                break;
+            }
+        }
+}
 void vacant(int count, parking *plist)
 {
     int left = 20 - count;
