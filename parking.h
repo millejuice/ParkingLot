@@ -27,6 +27,7 @@ typedef struct
 
 int addData(parking *s, parking *a, int count); // 데이터를 출력하는 함수
 int fixData(parking *s, parking *a, int count); // 데이터를 수정하는 함수
+void deleteData(parking* p,int count);//데이터 삭제하는 함수
 void vacant(int count, parking *plist);
 void payment(parking *plist);
 void findMyCar(parking *p, int count);
