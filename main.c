@@ -38,7 +38,8 @@ int main()
 
         if (menu == 7) // 내 자동차 어딨는지 구하는 함수
         {
-            findMyCar(plist, count);
+          	printParkinglot(plist, count);
+	      	findMyCar(plist, count);
         }
 
         if (menu == 8) // 지불 금액, 거스름돈 구하는 함수
