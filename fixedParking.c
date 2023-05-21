@@ -128,7 +128,7 @@ int addData(parking *p, parking *a, int count)
 
 int fixData(parking *p, parking *a, int count)
 { // *p는 저장할 위치, *a는 리스트의 처음 위치, count는 현재 몇개가 저장되어있는이 위치
-    int T = 0;
+   // int T = 0;
     printf("차량번호를 입력하세요\n");
     scanf("%s", p->carName);
     printf("들어온 시간을 입력하세요. ex) 0900\n");
@@ -139,19 +139,20 @@ int fixData(parking *p, parking *a, int count)
     while (1)
     {
         int T = 0; // while문 break 판단 변수
+        int seat;
         // 주차 자리 번호 입력------------------------
         printf("주차하실 자리 번호를 선택하세요 ex) 1~20 \n");
-        scanf("%d", &(p->place));
+        scanf("%d", &seat);
         for (int i = 0; i < count; i++)
         {
-            if (p->place == a[i].place)
+            if (seat == a[i].place)
             {
                 printf("다른 차가 주차되어 있습니다. 다른 자리를 입력해 주세요\n");
                 T = 1;
                 break;
             }
         }
-        if (T == 0)
+      p->place = seat;
             break;
     }
     printf("자리 배정이 완료 되었습니다.\n");
