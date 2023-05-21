@@ -279,6 +279,8 @@ void vacant(int count, parking *plist)
 void findMyCar(parking *p, int count)
 {
     char targetCar[20];
+    int ch=0;
+    int a;
 
     printf("차량번호를 입력하세요:\n");
     scanf("%s", targetCar);
@@ -287,12 +289,21 @@ void findMyCar(parking *p, int count)
     {
         if (strcmp(targetCar, p[i].carName) == 0) // 입력한 차번호가 동일하면
         {
-            printf("차가 %d에 주차되어 있습니다!\n", p[i].place);
+            ch=1;
+            a=i;
         }
         else // 차번호가 동일하지 않으면
         {
-            printf("등록된 차가 없습니다!!\n");
+            ;
         }
+    }
+
+    if(ch == 1)
+    {
+        printf("차가 %d에 주차되어 있습니다!\n", p[a].place);
+    }
+    else{
+        printf("등록된 차가 없습니다!\n");
     }
 }
 
