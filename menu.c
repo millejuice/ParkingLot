@@ -16,7 +16,7 @@ int printMenu()
     printf("|   8. 지불할 금액 & 거스름돈               |\n");
     printf("|   0. 종료                                 |\n");
     printf("---------------------------------------------\n");
-
+    printf(" 입력:");
     scanf("%d", &result);
 
     return result;

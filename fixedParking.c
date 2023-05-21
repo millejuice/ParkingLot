@@ -29,7 +29,7 @@ int printMenu();                                // 메뉴를 출력하는 함수
 int addData(parking *s, parking *a, int count); // 데이터를 출력하는 함수
 int fixData(parking *s, parking *a, int count); // 데이터를 수정하는 함수
 void vacant(int count, parking *plist);
-void payment(parking *plist);
+void payment(parking *plist,int count);
 void findMyCar(parking *p, int count);
 void payNchange(parking *p, int count);
 int selectData(parking *a, int count); // 리스트를 출력하고 + 사용자에게 데이터를 입력받고 수정하는 함수
@@ -66,7 +66,7 @@ int main()
         }
         if (menu == 5) // 요금 정산하기
         {
-            payment(&plist[index]);
+            payment(plist,count);
         }
 
         if (menu == 6) // 남은 자리 함수 구하기
@@ -93,7 +93,7 @@ int main()
 
 int addData(parking *p, parking *a, int count)
 { // *p는 저장할 위치, *a는 리스트의 처음 위치, count는 현재 몇개가 저장되어있는이 위치
-    int T = 0;
+   // int T = 0;
     printf("차량번호를 입력하세요\n");
     scanf("%s", p->carName);
     printf("들어온 시간을 입력하세요. ex) 0900\n");
@@ -189,25 +189,47 @@ int printCharge(parking *p)
     return 0;
 }
 
-void payment(parking *plist)
+void payment(parking *plist,int c)
 {
+    int num;
+    printf("주차된 위치를 알려주세요: ");
+    scanf("%d", &num);
+    int ob;
+
+    for(int i=0;i<c;i++)
+    {
+        if(plist[i].place == num)
+        {
+            printf("찾았습니다!\n");
+            ob=i;
+        }
+        else{
+            printf("차량이 없습니다\n");
+        }
+    }
+    int et=0;
+    int em=0;
     int hour = 0; // 머무른 시간
     int min = 0;  // 분
     printf("시간당 2000원, 30분 단위로 1500원\n");
     // 1시간 23분 머물렀으면 3500원
-    printf("나가는 시간을 입력하세요: ");
-    scanf(" %d %d\n", &(plist->exitTimeH), &(plist->exitTimeM));
+    printf("나가는 시간을 입력하세요(ex0900): ");
+    scanf(" %d", &et);
+    em=et;
 
-    hour = plist->exitTimeH - plist->enterTimeH;
-    min = plist->exitTimeM - plist->enterTimeM;
+    plist[ob].exitTimeH = et/100;
+    plist[ob].exitTimeM = em%100;
+
+    hour = plist[ob].exitTimeH - plist[ob].enterTimeH;
+    min = plist[ob].exitTimeM - plist[ob].enterTimeM;
 
     if (min <= 30)
         min = 1;
     else if (min > 30)
         min = 2;
 
-    plist->total_pay = hour * 2000 + min * 1500;
-    printf("지불해야 할 금액: %d\n", plist->total_pay);
+    plist[ob].total_pay = hour * 2000 + min * 1500;
+    printf("지불해야 할 금액: %d\n", plist[ob].total_pay);
 }
 
 void vacant(int count, parking *plist)
