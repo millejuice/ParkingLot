@@ -17,9 +17,6 @@ typedef struct
     int exitTimeM;    //
     int total_pay;    // 총 계산해야할 요금
     int change;       // 거스름돈
-    //-------------------------------
-    // 아직 사용되지 않은 변수
-
     int weekend;  // 남은 자리 갯수
     int discount; // 할인 요금
 
