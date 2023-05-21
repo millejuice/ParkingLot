@@ -37,6 +37,8 @@ void printMiddleDot();
 void printEmpty();
 void printMiddle(int a, int b, parking *plist, int count);
 void printParkinglot(parking *a, int count);
+void readFile(parking *plist,int count);
+void saveFile(parking *p,int count);
 
 int main()
 {
@@ -82,6 +84,16 @@ int main()
         if (menu == 8) // 지불 금액, 거스름돈 구하는 함수
         {
             payNchange(plist, count);
+        }
+
+        if(menu == 9)
+        {
+            readFile(plist,count);
+        }
+
+        if(menu == 10)
+        {
+            saveFile(plist,count);
         }
 
         if (menu == 0) // 종료
@@ -187,6 +199,8 @@ int printMenu()
     printf("|   6. 남은 자리 확인하기                   |\n");
     printf("|   7. 내 자동차 찾기                       |\n");
     printf("|   8. 지불할 금액 & 거스름돈               |\n");
+    printf("|   9. 파일 읽어오기                        |\n");
+    printf("|  10. 읽어온 데이타 출력                   |\n");
     printf("|   0. 종료                                 |\n");
     printf("---------------------------------------------\n");
 
@@ -340,6 +354,12 @@ void payNchange(parking *p, int count)
         }
     }
 }
+
+void readData(parking a)
+{
+    // 읽어오는 함수 구현해야한다
+    printf("%9s      %02d : %02d    %d\n", a.carName, a.enterTimeH, a.enterTimeM, a.place);
+}
 void listData(parking *a, int count)
 {
     printf("등록되어 있는 데이터의 리스트\n\n");
@@ -354,11 +374,7 @@ void listData(parking *a, int count)
     }
     printf("\n");
 }
-void readData(parking a)
-{
-    // 읽어오는 함수 구현해야한다
-    printf("%9s      %02d : %02d    %d\n", a.carName, a.enterTimeH, a.enterTimeM, a.place);
-}
+
 
 int selectData(parking *a, int count) // list를 출력하고 사용자에게 입력 받는 + 함수
 {
@@ -473,4 +489,65 @@ void printMiddle(int a, int b, parking *plist, int count)
         }
         printf("|\n");
     }
+}
+
+void readFile(parking *plist, int count)
+{
+    FILE *fp;
+    char filename[100];
+    printf("파일 이름을 입력하세요: ");
+    scanf("%s", filename);
+
+    fp = fopen(filename, "r");
+    if (fp == NULL)
+    {
+        printf("파일을 열 수 없습니다.\n");
+        return;
+    }
+    else{
+    printf("파일 읽기 성공!\n");
+    }
+
+    for (int i = 0; i < 20; i++)
+    {
+        fscanf(fp, "%s", plist[i].carName);
+        fscanf(fp, "%d", &(plist[i].enterTime));
+        fscanf(fp, "%d", &(plist[i].place));
+
+        plist[i].enterTimeH = plist[i].enterTime / 100; // 앞의 두자리 시간 = (s->enterTime)%100;
+        plist[i].enterTimeM = plist[i].enterTime % 100; // 뒤의 두자리 분= (s->enterTime)/10;
+        plist[i].pay = 0;
+
+        plist[i].clomm = (plist[i].place - 1) % 5; // 열위치
+        plist[i].row = (plist[i].place - 1) / 5;
+    }
+    fclose(fp);
+}
+
+void saveFile(parking *p,int count)
+{
+    FILE *fp;
+    char filename[100];
+    printf("파일 이름을 입력하세요: ");
+    scanf("%s", filename);
+
+    fp = fopen(filename, "r");
+    if (fp == NULL)
+    {
+        printf("파일을 열 수 없습니다.\n");
+        return;
+    }
+    else{
+    printf("파일 읽기 성공!\n");
+    }
+
+    for(int i=0;i<count;i++)
+    {
+        if(p[i].place == -1)
+            continue;
+
+        fprintf(fp, "%s %d %d\n", p[i].carName,p[i].enterTime,p[i].place);
+    }
+    fclose(fp);
+    printf("=>저장됨!\n");
 }
