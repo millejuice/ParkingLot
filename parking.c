@@ -100,45 +100,58 @@ void printCharge(parking *p)
     printf("지불해야 할 금액: %d\n", p->total_pay);
 }
 
-void payment(parking *plist)
+void payment(parking *plist,int c)
 {
+    int num;
+    printf("주차된 위치를 알려주세요: ");
+    scanf("%d", &num);
+    int ob;
+
+    for(int i=0;i<c;i++)
+    {
+        if(plist[i].place == num)
+        {
+            printf("찾았습니다!\n");
+            ob=i;
+        }
+        else{
+            printf("차량이 없습니다\n");
+        }
+    }
+    int et=0;
+    int em=0;
     int hour = 0; // 머무른 시간
     int min = 0;  // 분
     printf("시간당 2000원, 30분 단위로 1500원\n");
     // 1시간 23분 머물렀으면 3500원
-    printf("나가는 시간을 입력하세요: ");
-    scanf(" %d %d\n", &(plist->exitTimeH), &(plist->exitTimeM));
+    printf("나가는 시간을 입력하세요(ex0900): ");
+    scanf(" %d", &et);
+    em=et;
 
-    hour = plist->exitTimeH - plist->enterTimeH;
-    min = plist->exitTimeM - plist->enterTimeM;
+    plist[ob].exitTimeH = et/100;
+    plist[ob].exitTimeM = em%100;
+
+    hour = plist[ob].exitTimeH - plist[ob].enterTimeH;
+    min = plist[ob].exitTimeM - plist[ob].enterTimeM;
 
     if (min <= 30)
         min = 1;
     else if (min > 30)
         min = 2;
 
-    plist->total_pay = hour * 2000 + min * 1500;
-    printf("지불해야 할 금액: %d\n", plist->total_pay);
+    plist[ob].total_pay = hour * 2000 + min * 1500;
+    printf("지불해야 할 금액: %d\n", plist[ob].total_pay);
 }
 void deleteData(parking* p, int count)
 {
+    listData(p,count);
     int d;
-    printf("삭제할 자리 번호는? ");
-    scanf("%d", &d);                    //주차된 자리 번호 검색
-    for (int i = 0; i < count; i++)
-        {
-            if (p[i].place == d)        //입력한 자리와 주차 자리가 일치하다면
-            {
-                printf("차량 발견 했습니다!\n");
-                p[i].place = -1;     //자리 번호를 -1로 변화
-                break;
-            }
+    printf("몇번을 삭제하시겠습니까?");
+    scanf("%d",&d);
 
-            else{
-                printf("차랑 발견하지 못했습니다\n");      //없으면 프린트
-                break;
-            }
-        }
+    p[d-1].place = -1;
+
+    printf("삭제가 완료되었습니다!\n");
 }
 void vacant(int count, parking *plist)
 {
@@ -190,7 +203,7 @@ void findMyCar(parking *p, int count)
 
 void payNchange(parking *p, int count)
 {
-   char targetCar[20];
+  char targetCar[20];
 
     printf("차량번호를 입력하세요:\n");
     scanf("%s", targetCar);
