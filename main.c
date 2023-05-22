@@ -46,7 +46,10 @@ int main()
         {
             payNchange(plist, count);
         }
-
+	if (menu == 9)
+        {
+            saveFile(plist, count);
+        }
         if (menu == 0) // 종료
             break;
     }
