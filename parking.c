@@ -122,11 +122,16 @@ void deleteData(parking* p, int count)
 void vacant(int count, parking *plist)
 {
     int left = 20 - count;
-    printf("남은 자리 갯수: %d\n", count);
+    printf("남은 자리 갯수: %d\n", left);
     printf("사용할 수 없는 자리들:");
     for (int i = 0; i < count; i++)
     {
-        printf(" %d", plist[i].place);
+        if(plist[i].place == -1)
+        {
+            left++;
+        }
+        else
+            printf(" %d", plist[i].place);
     }
     printf("\n");
 }
