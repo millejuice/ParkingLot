@@ -413,4 +413,5 @@ void saveFile(parking *p, int count)
     }
     fclose(fp);
     printf("=>저장됨!\n");
+    
 }
