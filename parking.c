@@ -188,7 +188,7 @@ void listData(parking *a, int count)
 void readData(parking a)
 {
     // 읽어오는 함수 구현해야한다
-    printf("%9s      %02d : %02d    %d\n", a.carName, a.enterTimeH, a.enterTimeM, a.place);
+    printf("%-9s      %02d : %02d    %2d\n", a.carName, a.enterTimeH, a.enterTimeM, a.place);
 }
 
 int selectData(parking *a, int count) // list를 출력하고 사용자에게 입력 받는 + 함수
