@@ -40,3 +40,5 @@ void printEmpty();
 void printMiddle(int a, int b, parking *plist, int count);
 void printParkinglot(parking *a, int count);
 int readFile(parking *plist);
+void saveFile(parking *p, int count);
+
