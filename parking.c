@@ -309,3 +309,37 @@ void printMiddle(int a, int b, parking *plist, int count)
         printf("|\n");
     }
 }
+
+int readFile(parking *plist)
+{
+    int i = 0;
+    FILE *fp;
+    fp = fopen("person.txt", "r");
+    if (fp == NULL)
+    {
+        printf("파일을 열 수 없습니다.\n");
+        return 0;
+    }
+    else
+    {
+        printf("파일 읽기 성공!\n");
+    }
+
+    while (!feof(fp))
+    {
+        fscanf(fp, "%s", plist[i].carName);
+        fscanf(fp, "%d", &(plist[i].enterTime));
+        fscanf(fp, "%d", &(plist[i].place));
+
+        plist[i].enterTimeH = plist[i].enterTime / 100; // 앞의 두자리 시간 = (s->enterTime)%100;
+        plist[i].enterTimeM = plist[i].enterTime % 100; // 뒤의 두자리 분= (s->enterTime)/10;
+        plist[i].pay = 0;
+
+        plist[i].clomm = (plist[i].place - 1) % 5; // 열위치
+        plist[i].row = (plist[i].place - 1) / 5;
+        i++;
+    }
+    fclose(fp);
+
+    return i;
+}
