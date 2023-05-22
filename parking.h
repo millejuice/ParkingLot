@@ -39,3 +39,4 @@ void printMiddleDot();
 void printEmpty();
 void printMiddle(int a, int b, parking *plist, int count);
 void printParkinglot(parking *a, int count);
+int readFile(parking *plist);
