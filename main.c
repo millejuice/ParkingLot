@@ -33,7 +33,9 @@ int main()
 
         if (menu == 6) // 남은 자리 함수 구하기
         {
-            vacant(count, plist);
+          printParkinglot(plist, count);
+
+	     	vacant(count, plist);
         }
 
         if (menu == 7) // 내 자동차 어딨는지 구하는 함수
