@@ -343,3 +343,27 @@ int readFile(parking *plist)
 
     return i;
 }
+void saveFile(parking *p, int count)
+{
+    FILE *fp;
+    fp = fopen("person.txt", "w");
+    if (fp == NULL)
+    {
+        printf("파일을 열 수 없습니다.\n");
+        return;
+    }
+    else
+    {
+        printf("파일 읽기 성공!\n");
+    }
+
+    for (int i = 0; i < count; i++)
+    {
+        if (p[i].place == -1)
+            continue;
+
+        fprintf(fp, "%s %d %d\n", p[i].carName, p[i].enterTime, p[i].place);
+    }
+    fclose(fp);
+    printf("=>저장됨!\n");
+}
