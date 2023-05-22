@@ -4,8 +4,8 @@
 int main()
 {
     parking plist[20]; // 구조체 배열 20개 선언
-    int count = 0;     // 총 몇개가 있는지 index번호
-    int index = 0;     // 배열의 인덱스 번호가 몇번인지
+    int count = readFile(plist);     // 총 몇개가 있는지 index번호
+    int index = count;     // 배열의 인덱스 번호가 몇번인지
     while (1)
     {
         int menu = printMenu();
