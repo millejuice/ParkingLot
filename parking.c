@@ -344,7 +344,7 @@ void printMiddle(int a, int b, parking *plist, int count)
             }
             else if (term == 0)
             {
-                printf("%14s", "주차 가능");
+                printf("%10s", "");
             }
         }
         printf("|");
