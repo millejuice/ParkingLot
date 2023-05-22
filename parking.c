@@ -73,10 +73,31 @@ p->place = -1;
 
     return 1;
 }
-int printCharge(parking *p)
+
+void printCharge(parking *p)
 {
+     int et=0;
+    int em=0;
+    int hour = 0; // 머무른 시간
+    int min = 0;  // 분
+
+    printf("나가는 시간을 입력하세요(ex0900): ");
+    scanf(" %d", &et);
+    em=et;
+
+    p->exitTimeH = et/100;
+    p->exitTimeM = em%100;
+
+    hour = p->exitTimeH - p->enterTimeH;
+    min = p->exitTimeM - p->enterTimeM;
+
+    if (min <= 30)
+        min = 1;
+    else if (min > 30)
+        min = 2;
+
+    p->total_pay = hour * 2000 + min * 1500;
     printf("지불해야 할 금액: %d\n", p->total_pay);
-    return 0;
 }
 
 void payment(parking *plist)
@@ -139,6 +160,8 @@ void vacant(int count, parking *plist)
 void findMyCar(parking *p, int count)
 {
     char targetCar[20];
+    int ch=0;
+    int a;
 
     printf("차량번호를 입력하세요:\n");
     scanf("%s", targetCar);
@@ -147,18 +170,27 @@ void findMyCar(parking *p, int count)
     {
         if (strcmp(targetCar, p[i].carName) == 0) // 입력한 차번호가 동일하면
         {
-            printf("차가 %d에 주차되어 있습니다!\n", p[i].place);
+            ch=1;
+            a=i;
         }
         else // 차번호가 동일하지 않으면
         {
-            printf("등록된 차가 없습니다!!\n");
+            ;
         }
+    }
+
+    if(ch == 1)
+    {
+        printf("차가 %d에 주차되어 있습니다!\n", p[a].place);
+    }
+    else{
+        printf("등록된 차가 없습니다!\n");
     }
 }
 
 void payNchange(parking *p, int count)
 {
-    char targetCar[20];
+   char targetCar[20];
 
     printf("차량번호를 입력하세요:\n");
     scanf("%s", targetCar);
@@ -173,9 +205,18 @@ void payNchange(parking *p, int count)
             printf("얼마를 지불하겠습니까? \n");
             scanf("%d", &p[i].pay);
 
+            if(p[i].pay<p[i].total_pay)
+            {
+                printf("돈이 부족합니다!!! 출차를 하실 수 없습니다\n");
+                printf("추가로 내셔야 할 돈은 %d입니다\n", p[i].total_pay - p[i].pay);
+            }
+
+            else{
             p[i].change = p[i].pay - p[i].total_pay;
 
             printf("거스름돈은 %d입니다.\n", p[i].change);
+            }
+
             break;
         }
     }
@@ -328,6 +369,7 @@ int readFile(parking *plist)
     else
     {
         printf("파일 읽기 성공!\n");
+        printf("1234번 차량 09:10부터 12번 자리에 주차되어 있습니다!\n");
     }
 
     while (!feof(fp))
