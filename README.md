@@ -57,14 +57,14 @@ int vacant(){}
 종료
 
 ### 개발환경 및 언어
-개발환경: 
-putty 
+개발환경:<br> 
+putty <br>
 <img width="381" alt="image" src="https://github.com/millejuice/ParkingLot/assets/109461985/79d8b67e-0ef1-40af-84de-cb88c5eec1b0">
-
-vscode
+<br>
+vscode<br>
 <img width="337" alt="image" src="https://github.com/millejuice/ParkingLot/assets/109461985/7b93fe61-bee7-40fc-b02c-e1110812ceaa">
-
-언어: C
+<br>
+언어:<br> C <br>
 <img width="337" alt="image" src="https://github.com/millejuice/ParkingLot/assets/109461985/04f0eb77-7d54-4762-a0f6-6c07e33db26d">
 
 
