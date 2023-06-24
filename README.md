@@ -57,12 +57,16 @@ int vacant(){}
 종료
 
 ### 개발환경 및 언어
-개발환경: putty, vscode
+개발환경: 
+putty 
+<img width="381" alt="image" src="https://github.com/millejuice/ParkingLot/assets/109461985/79d8b67e-0ef1-40af-84de-cb88c5eec1b0">
+
+vscode
+<img width="337" alt="image" src="https://github.com/millejuice/ParkingLot/assets/109461985/7b93fe61-bee7-40fc-b02c-e1110812ceaa">
+
 언어: C
--project에 포함시킬 기능 설명
--project에 포함시킬 기능 설명
--project에 포함시킬 기능 설명
--project에 포함시킬 기능 설명
+<img width="337" alt="image" src="https://github.com/millejuice/ParkingLot/assets/109461985/04f0eb77-7d54-4762-a0f6-6c07e33db26d">
+
 
 ### 팀원 소개
 2 Contributor
